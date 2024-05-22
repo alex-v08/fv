@@ -16,7 +16,8 @@ import lombok.Setter;
 public class Product {
 
     @Id
-    private String codigo;
-    private String descripcion;
-    private float precio;
+    private String code;
+    private String description;
+    private float price;
+
 }

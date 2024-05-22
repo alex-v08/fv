@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IProductoRepository extends JpaRepository<Product, String> {
+public interface IProductRepository extends JpaRepository<Product, String> {
 
-    List<Product> findByDescripcion(String descripcion);
+
 
 }
