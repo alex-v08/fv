@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.atuhome.msvcproduct.dto.ProductDto;
 import org.atuhome.msvcproduct.entity.Product;
 import org.atuhome.msvcproduct.repository.IProductRepository;
 import org.atuhome.msvcproduct.service.impl.IProductService;
@@ -49,13 +50,14 @@ public class ProductService implements IProductService {
                 }
 
                 // Create a new product object
-                Product product = new Product();
-                product.setCode(row.getCell(0).getStringCellValue());
-                product.setDescription(row.getCell(1).getStringCellValue());
-                product.setPrice((float) row.getCell(2).getNumericCellValue());
+                ProductDto productDto = new ProductDto();
+                productDto.setCode(row.getCell(0).getStringCellValue());
+                productDto.setDescription(row.getCell(1).getStringCellValue());
+                productDto.setPrice((float) row.getCell(2).getNumericCellValue());
 
-                // Save the product to the database
-                productRepository.save(product);
+                // Save the productDto to the database
+                saveProductFromDto(productDto);
+
             }
 
         } catch (InvalidFormatException e) {
@@ -66,19 +68,41 @@ public class ProductService implements IProductService {
         }
     }
 
+    private void saveProductFromDto(ProductDto productDto) {
+        Product product = new Product();
+        product.setCode(productDto.getCode());
+        product.setDescription(productDto.getDescription());
+        product.setPrice(productDto.getPrice());
+        productRepository.save(product);
+    }
+
+
+    //Find product by filter for description in database
+
     @Override
-    public List<Product> listProducts() {
+    public List<ProductDto> listProducts(String description) {
+
+
+
         return List.of();
     }
 
     @Override
     public Product getProductByCode(String code) {
-        return null;
-    }
+       return null;
 
+    }
+    //Find product by filter for description in database
     @Override
-    public List<Product> searchProductsByDescription(String description) {
-        return List.of();
+    public ProductDto searchProductsByDescription(String description) {
+        ProductDto productDto = new ProductDto();
+        Product product = productRepository.findByDescription(description);
+        productDto.setCode(product.getCode());
+        productDto.setDescription(product.getDescription());
+        productDto.setPrice(product.getPrice());
+
+        return productDto;
+
     }
 
     @Override
