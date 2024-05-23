@@ -2,6 +2,7 @@ version: '3.1'
 
 volumes:
   mysql-data:
+    driver: local
 
 services:
   mysql:
@@ -17,3 +18,4 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./data.xls:/var/lib/mysql-files/data.xls

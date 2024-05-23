@@ -1,10 +1,9 @@
 package org.atuhome.msvcproduct.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.formula.functions.T;
 import org.atuhome.msvcproduct.dto.ProductDto;
 import org.atuhome.msvcproduct.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
+
     private final ProductService productService;
 
     @PostMapping("/upload")
