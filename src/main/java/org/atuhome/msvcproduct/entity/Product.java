@@ -8,13 +8,13 @@ import lombok.*;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+
 @NoArgsConstructor
 
 public class Product {
 
     @Id
-    private String code;
+    private Long code;
     private String description;
     private float price;
 

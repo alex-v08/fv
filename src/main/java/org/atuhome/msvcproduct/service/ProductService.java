@@ -51,7 +51,7 @@ public class ProductService implements IProductService {
 
                 // Create a new product object
                 ProductDto productDto = new ProductDto();
-                productDto.setCode(row.getCell(0).getStringCellValue());
+                productDto.setCode(Long.valueOf(row.getCell(0).getStringCellValue()));
                 productDto.setDescription(row.getCell(1).getStringCellValue());
                 productDto.setPrice((float) row.getCell(2).getNumericCellValue());
 
@@ -68,6 +68,20 @@ public class ProductService implements IProductService {
         }
     }
 
+    @Override
+    public ProductDto getProductByCode(String code) {
+        ProductDto productDto = productRepository.findByCode(Long.valueOf(code));
+        return productDto;
+
+    }
+
+    @Override
+    public ProductDto searchProductsByDescription(String description) {
+        ProductDto productDto = productRepository.findByDescription(description);
+        return productDto;
+    }
+
+
     private void saveProductFromDto(ProductDto productDto) {
         Product product = new Product();
         product.setCode(productDto.getCode());
@@ -79,35 +93,12 @@ public class ProductService implements IProductService {
 
     //Find product by filter for description in database
 
-    @Override
-    public List<ProductDto> listProducts(String description) {
 
 
 
-        return List.of();
-    }
-
-    @Override
-    public Product getProductByCode(String code) {
-       return null;
-
-    }
     //Find product by filter for description in database
-    @Override
-    public ProductDto searchProductsByDescription(String description) {
-        ProductDto productDto = new ProductDto();
-        Product product = productRepository.findByDescription(description);
-        productDto.setCode(product.getCode());
-        productDto.setDescription(product.getDescription());
-        productDto.setPrice(product.getPrice());
 
-        return productDto;
 
-    }
 
-    @Override
-    public float calculateTotalPrice(List<String> codes) {
-        return 0;
-    }
 
 }

@@ -1,6 +1,7 @@
 package org.atuhome.msvcproduct.repository;
 
 
+import org.atuhome.msvcproduct.dto.ProductDto;
 import org.atuhome.msvcproduct.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,9 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IProductRepository extends JpaRepository<Product, String> {
+public interface IProductRepository extends JpaRepository<Product, Long> {
 
 
-    Product findByDescription(String description);
+    ProductDto findByDescription(String description);
+    ProductDto findByCode(Long code);
 
 }
